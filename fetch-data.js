@@ -4,16 +4,19 @@ async function fetchUserData(){
   try {
     const response = await fetch(apiUrl);
     const users = await response.json();
-    let userList = []
+    const userList = document.createElement("ul");
     users.forEach( usr => {
-      userList.push(`<li> ${usr.name}</li>`);
+      let userName = document.createElement("li");
+      userName.textContent = usr.name;
+      userList.appendChild(userName);
     }
     )
     dataContainer.innerHTML = '';
-    dataContainer.innerHTML = `<ul> ${userList.join('')} </ul>`;
+    dataContainer.appendChild(userList);
 
   } catch (err) {
     console.error(`Fetching error: ${err}`);
+    dataContainer.innerHTML = '';
   }
 }
 
